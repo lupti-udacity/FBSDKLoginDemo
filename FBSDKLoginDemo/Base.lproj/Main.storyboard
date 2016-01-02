@@ -1,25 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="td9-jF-FCv">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="FBSDKLoginDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="WxM-uj-JhJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dt-pB-hBQ" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="20" y="72" width="240" height="69"/>
+                                <color key="backgroundColor" red="1" green="0.24461866830000001" blue="0.1296188201" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="9do-m3-2Ug"/>
+                                    <constraint firstAttribute="height" constant="69" id="vkh-gg-GzV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="0dt-pB-hBQ" secondAttribute="leading" id="0RH-6m-vts"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0dt-pB-hBQ" secondAttribute="bottom" constant="459" id="60x-oU-t1g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0dt-pB-hBQ" secondAttribute="trailing" constant="248" id="VQ5-1G-Tif"/>
+                            <constraint firstItem="0dt-pB-hBQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="27" id="dlZ-FG-Ogf"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="VQ5-1G-Tif"/>
+                                <exclude reference="dlZ-FG-Ogf"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Login View" id="bgu-8G-Q8T"/>
+                    <connections>
+                        <outlet property="loginButton" destination="0dt-pB-hBQ" id="i6N-as-rJy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="782" y="263"/>
+        </scene>
+        <!--Protected Page-->
+        <scene sceneID="GxS-vK-KSp">
+            <objects>
+                <viewController storyboardIdentifier="ProtectedPageViewController" title="Protected Page" id="AEd-yO-UAu" customClass="ProtectedPageViewController" customModule="FBSDKLoginDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KIl-O8-ruC"/>
+                        <viewControllerLayoutGuide type="bottom" id="WYg-58-xRW"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="zP1-ll-wnE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ToE-yh-o67">
+                                <rect key="frame" x="245" y="152" width="110" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ETy-W4-y7Y"/>
+                                    <constraint firstAttribute="width" constant="110" id="JUJ-ZN-0h5"/>
+                                </constraints>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="AEd-yO-UAu" eventType="touchUpInside" id="CIV-jE-SAU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ToE-yh-o67" firstAttribute="top" secondItem="KIl-O8-ruC" secondAttribute="bottom" constant="88" id="oWM-cY-Us9"/>
+                            <constraint firstItem="ToE-yh-o67" firstAttribute="centerX" secondItem="zP1-ll-wnE" secondAttribute="centerX" id="tDS-Yr-wI4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Protected Page" id="XNP-Jk-0yy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jIY-2t-lbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1747" y="264"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VoG-KB-tpJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="td9-jF-FCv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7O9-Ql-P2r">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="gRS-VS-Pnb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dT8-R8-0GM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="91" y="263"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2uQ-CR-w7I">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1ds-fZ-kX8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UH7-2i-rNj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AEd-yO-UAu" kind="relationship" relationship="rootViewController" id="HNO-Yg-vMH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="08e-ne-arY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="264"/>
         </scene>
     </scenes>
 </document>
