@@ -12,6 +12,7 @@ import FBSDKLoginKit
 class ViewController: UIViewController, FBSDKLoginButtonDelegate{
 
     @IBOutlet weak var loginButton: FBSDKLoginButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,7 +27,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
         loginButton.readPermissions = ["public_profile", "email", "user_friends"]
         
     }
-
+/* Absoultely required FB login function*/
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
         guard error == nil else {
@@ -55,9 +56,11 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
         displayNextView("ProtectedPageViewController")
     }
 
+/* Another Required FB function holder */
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
      /* This function is required by the FBSDKLogin but not necessary implement here. */
-     print("loginButtonDidLogOut(loginButton: FBSDKLoginButton!)")
+        print("loginButtonDidLogOut(loginButton: FBSDKLoginButton!)")
+        print("*** User Did Logout!")
         
     }
     
