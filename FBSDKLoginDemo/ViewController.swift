@@ -29,19 +29,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
 
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
-        if (error != nil)
-        {
+        guard error == nil else {
             print(error.localizedDescription)
             return
         }
         
-        if let userToken = result.token
-        {
-            let token:FBSDKAccessToken = result.token
+        guard result.token != nil else {
+            return
+        }
             print("Token is \(FBSDKAccessToken.currentAccessToken().tokenString)")
             print("User ID is \(FBSDKAccessToken.currentAccessToken().userID)")
-        }
+            print("App ID is \(FBSDKAccessToken.currentAccessToken().appID)")
         
+        /* Template to navigate to next page using storyboard view identifier */
         let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
         let protectedPageNav = UINavigationController(rootViewController: protectedPage)
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -52,22 +52,23 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if (FBSDKAccessToken.currentAccessToken() != nil)
-        {
-            let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
-            let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window?.rootViewController = protectedPageNav
-
+        guard FBSDKAccessToken.currentAccessToken() != nil else {
+            return
         }
-    }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         
-        
+        /* Template to navigate to next page using storyboard view identifier */
+        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
+        let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.rootViewController = protectedPageNav
         
     }
 
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+     /* This function is required by the FBSDKLogin but not necessary implement here. */
+     print("loginButtonDidLogOut(loginButton: FBSDKLoginButton!)")
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
