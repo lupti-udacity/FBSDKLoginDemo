@@ -41,11 +41,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
             print("User ID is \(FBSDKAccessToken.currentAccessToken().userID)")
             print("App ID is \(FBSDKAccessToken.currentAccessToken().appID)")
         
-        /* Template to navigate to next page using storyboard view identifier */
-        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
-        let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = protectedPageNav
+        displayNextView("ProtectedPageViewController")
     }
     
     
@@ -56,12 +52,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
             return
         }
         
-        /* Template to navigate to next page using storyboard view identifier */
-        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier("ProtectedPageViewController") as! ProtectedPageViewController
-        let protectedPageNav = UINavigationController(rootViewController: protectedPage)
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = protectedPageNav
-        
+        displayNextView("ProtectedPageViewController")
     }
 
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
@@ -75,6 +66,14 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
         // Dispose of any resources that can be recreated.
     }
 
+    func displayNextView(identifier: String) {
+        
+        let protectedPage = self.storyboard?.instantiateViewControllerWithIdentifier(identifier) as! ProtectedPageViewController
+        
+        let protectedPageNav = UINavigationController(rootViewController: protectedPage)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.rootViewController = protectedPageNav
+    }
 
 }
 
