@@ -13,8 +13,13 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
 
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     
+    var udacityClient: UdacityClient?
+    var applicationDelegate: AppDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        udacityClient = UdacityClient.sharedInstance
+        applicationDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         // Do any additional setup after loading the view, typically from a nib.
         if (FBSDKAccessToken.currentAccessToken() == nil)
         {
@@ -42,7 +47,24 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
             print("User ID is \(FBSDKAccessToken.currentAccessToken().userID)")
             print("App ID is \(FBSDKAccessToken.currentAccessToken().appID)")
         
+        
+        if let udacityClient = udacityClient {
+            
+            udacityClient.loginWithFB(FBSDKAccessToken.currentAccessToken().tokenString) {
+                data, error in
+                print("**** Data FB is \(data)")
+                if data != nil {
+                    print("*** 1ST step Login data is \(data)")
+                }else{
+                    self.showError("Error", message: "Unable to login 1")
+                }
+                        }
+        } else {
+                    self.showError("Error", message: "Unable to login 3")
+
+        }
         displayNextView("ProtectedPageViewController")
+
     }
     
     
@@ -52,8 +74,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
         guard FBSDKAccessToken.currentAccessToken() != nil else {
             return
         }
-        
-        displayNextView("ProtectedPageViewController")
     }
 
 /* Another Required FB function holder */
@@ -77,6 +97,20 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate{
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = protectedPageNav
     }
+
+    func showError(title: String? , message: String?) {
+        dispatch_async(dispatch_get_main_queue()){
+            //self.activityIndicator.stopAnimating()
+            //self.loginUdacityButton.enabled = true
+            if title != nil && message != nil {
+                let errorAlert =
+                UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                errorAlert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(errorAlert, animated: true, completion: nil)
+            }
+        }
+    }
+
 
 }
 
